@@ -1,4 +1,4 @@
-package ru.crazy.playground.aop;
+package ru.crazy.playground.bpp;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

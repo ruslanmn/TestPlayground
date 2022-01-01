@@ -2,14 +2,14 @@ package ru.crazy.playground.bean;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.crazy.playground.aop.PostContextConstruct;
-import ru.crazy.playground.aop.Profiler;
-import ru.crazy.playground.aop.RandomInt;
-
-import javax.annotation.PostConstruct;
+import ru.crazy.playground.bpp.PostContextConstruct;
+import ru.crazy.playground.bpp.Profiler;
+import ru.crazy.playground.bpp.RandomInt;
+import ru.crazy.playground.bpp.ReplaceImpl;
 
 @Service
 @Profiler
+@ReplaceImpl(impl = Int1000Bean.class)
 @RequiredArgsConstructor
 public class IntBean implements IntGen {
     @RandomInt(min = -1488, max = -1487 )

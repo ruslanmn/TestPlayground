@@ -1,12 +1,10 @@
-package ru.crazy.playground.aop.impl;
+package ru.crazy.playground.bpp.impl;
 
 import lombok.SneakyThrows;
-import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanInitializationException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.stereotype.Component;
-import ru.crazy.playground.aop.RandomInt;
+import ru.crazy.playground.bpp.RandomInt;
 
 import java.util.Random;
 

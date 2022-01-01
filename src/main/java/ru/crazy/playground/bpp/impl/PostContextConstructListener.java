@@ -1,11 +1,11 @@
-package ru.crazy.playground.aop.impl;
+package ru.crazy.playground.bpp.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
-import ru.crazy.playground.aop.PostContextConstruct;
+import ru.crazy.playground.bpp.PostContextConstruct;
 
 import java.util.Arrays;
 

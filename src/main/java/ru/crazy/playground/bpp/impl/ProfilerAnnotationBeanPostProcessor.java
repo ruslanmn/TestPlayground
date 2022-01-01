@@ -1,11 +1,12 @@
-package ru.crazy.playground.aop.impl;
+package ru.crazy.playground.bpp.impl;
 
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.stereotype.Component;
-import ru.crazy.playground.aop.Profiler;
+import org.springframework.util.ClassUtils;
+import ru.crazy.playground.bpp.Profiler;
 import ru.crazy.playground.mbean.ProfilerToggle;
 
 import javax.management.ObjectName;
@@ -40,7 +41,7 @@ public class ProfilerAnnotationBeanPostProcessor implements BeanPostProcessor {
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
         return beansToProcess.contains(beanName) ?
             Proxy.newProxyInstance(bean.getClass().getClassLoader(),
-                    bean.getClass().getInterfaces(),
+                    ClassUtils.getAllInterfaces(bean),
                     (proxy, method, args) -> {
                 if (toggle.isEnabled()) {
                     var start = System.nanoTime();
