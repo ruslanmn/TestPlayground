@@ -15,18 +15,22 @@ public class RandomIntAnnotationBeanPostProcessor implements BeanPostProcessor {
     @Override
     @SneakyThrows
     public Object postProcessBeforeInitialization(Object bean, String beanName) {
-        for (var field : bean.getClass().getDeclaredFields()) {
-            if (field.isAnnotationPresent(RandomInt.class)) {
-                var randIntAnnotation = field.getAnnotation(RandomInt.class);
-                if (randIntAnnotation.min() >= randIntAnnotation.max()) {
-                    throw new BeanInitializationException("Incorrect range for @" + RandomInt.class.getSimpleName()
-                            + " at field " + field.getName());
+        var clazz = bean.getClass();
+        while (clazz != null) {
+            for (var field : clazz.getDeclaredFields()) {
+                if (field.isAnnotationPresent(RandomInt.class)) {
+                    var randIntAnnotation = field.getAnnotation(RandomInt.class);
+                    if (randIntAnnotation.min() >= randIntAnnotation.max()) {
+                        throw new BeanInitializationException("Incorrect range for @" + RandomInt.class.getSimpleName()
+                                + " at field " + field.getName());
+                    }
+                    field.setAccessible(true);
+                    field.setInt(bean,
+                            gen.nextInt(randIntAnnotation.max() - randIntAnnotation.min())
+                                    + randIntAnnotation.min());
                 }
-                field.setAccessible(true);
-                field.setInt(bean,
-                        gen.nextInt(randIntAnnotation.max() - randIntAnnotation.min())
-                                + randIntAnnotation.min());
             }
+            clazz = clazz.getSuperclass();
         }
         return bean;
     }
