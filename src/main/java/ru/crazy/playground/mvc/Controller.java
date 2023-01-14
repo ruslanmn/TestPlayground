@@ -1,32 +1,34 @@
 package ru.crazy.playground.mvc;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Scope;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.crazy.playground.bean.CompositeBean1;
 import ru.crazy.playground.bean.CompositeBean2;
-import ru.crazy.playground.bean.IntBean;
 import ru.crazy.playground.bean.IntGen;
-import ru.crazy.playground.bean.RequestBean;
+import ru.crazy.playground.data.UserDto;
+import service.TestService;
+import service.TestServiceConfig;
 
-@Scope("request")
 @RestController
 @RequiredArgsConstructor
 public class Controller {
     private final CompositeBean1 compositeBean1;
     private final CompositeBean2 compositeBean2;
-    private final RequestBean requestBean;
     private final IntGen intBean;
+    private final TestService testService;
 
     @GetMapping("/hello")
     public String getHello() {
-        return compositeBean1.hello() + compositeBean2.hello()
-                + " " + requestBean.name(this.getClass().getSimpleName());
+//        compositeBean1.hello() + compositeBean2.hello()
+//                + " " + requestBean.name(this.getClass().getSimpleName());
+        return testService.getStr();
     }
 
     @GetMapping("/int")
-    public int getInt() {
+    public int getInt(Specification<UserDto> userFilter, Pageable pageable) {
         return intBean.getInt();
     }
 }

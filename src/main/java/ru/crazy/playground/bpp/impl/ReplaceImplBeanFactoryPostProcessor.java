@@ -3,12 +3,13 @@ package ru.crazy.playground.bpp.impl;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import ru.crazy.playground.bpp.ReplaceImpl;
 
 import java.util.Arrays;
 
-@Service
+@Component
 public class ReplaceImplBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory configurableListableBeanFactory) throws BeansException {

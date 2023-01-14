@@ -47,7 +47,7 @@ public class ProfilerAnnotationBeanPostProcessor implements BeanPostProcessor {
                     var start = System.nanoTime();
                     var res = method.invoke(bean, args);
                     var end = System.nanoTime();
-                    log.info("{} executed for {} seconds", method.getName(), TimeUnit.NANOSECONDS.toSeconds(end - start));
+                    log.info("{} executed for {} seconds", method.toString(), TimeUnit.NANOSECONDS.toSeconds(end - start));
                     return res;
                 } else {
                     return method.invoke(bean, args);
